@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gears</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "p5": "https://cdn.jsdelivr.net/npm/p5@1.9.3/+esm"
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #fafafa;
+      }
+      .info-card {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 280px;
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        font-family: sans-serif;
+        font-size: 14px;
+        color: white;
+        line-height: 1.4;
+      }
+      .info-card h2 {
+        margin-top: 0;
+        font-size: 16px;
+      }
+      ul {
+        padding-left: 15px;
+      }
+      li {
+        margin: 10px 0;
+      }
+
+      #main-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="info-card">
+      <h1>Energy Transfer</h1>
+
+      <ul>
+        <li>
+          The red gear located at the top-left of the assembly is the driving
+          gear that initiates motion in the entire system.
+        </li>
+        <li>
+          Its clockwise rotation transfers torque to the gear below it and the
+          rest of the connected gears through direct meshing.
+        </li>
+        <li>
+          Each gear reverses direction relative to its neighbor, depending on
+          the number of intermediate gears in the path.
+        </li>
+      </ul>
+    </div>
+    <div id="main-container">
+      <div id="canvas-parent"></div>
+    </div>
+    <script type="module">
+      import p5 from "p5";
+
+      // for drawing and updating gear properties
+      class Gear {
+        constructor(x, y, teeth, radius, spacing, name, color = "transparent") {
+          this.x = x;
+          this.y = y;
+          this.teeth = teeth;
+          this.radius = radius;
+          this.spacing = spacing;
+          this.angle = 0;
+          this.angularVel = 0;
+          this.skipTeeth = false;
+          this.color = color;
+          this.name = name;
+        }
+
+        // Update rotation angle based on angular velocity and time delta
+        update(dt) {
+          this.angle += this.angularVel * dt;
+        }
+
+        // Render the gear with teeth
+        draw(p) {
+          p.push();
+          p.translate(this.x, this.y);
+          p.rotate(this.angle);
+
+          if (!this.skipTeeth) {
+            const ctx = p.drawingContext;
+
+            if (this.color === "transparent") {
+              const grad = ctx.createRadialGradient(
+                0,
+                0,
+                this.radius * 0.1,
+                0,
+                0,
+                this.radius
+              );
+              grad.addColorStop(0, "#f5f5f5");
+              grad.addColorStop(0.7, "#b0b0b0");
+              grad.addColorStop(1, "#707070");
+              ctx.fillStyle = grad;
+            } else {
+              ctx.fillStyle = this.color;
+            }
+            p.noStroke();
+            p.ellipse(0, 0, this.radius * 2, this.radius * 2);
+
+            if (this.color === "transparent") {
+              p.stroke("#606060");
+            } else {
+              p.stroke(this.color);
+            }
+            p.strokeWeight(1);
+
+            for (let i = 0; i < this.teeth; i++) {
+              const θ = (i * p.TWO_PI) / this.teeth;
+              p.push();
+              p.rotate(θ);
+              p.beginShape();
+
+              p.vertex(this.radius, -this.spacing);
+              p.vertex(this.radius + this.spacing, -this.spacing * 0.1);
+              p.vertex(this.radius + this.spacing, this.spacing * 0.1);
+              p.vertex(this.radius, this.spacing);
+              p.endShape(p.CLOSE);
+              p.pop();
+            }
+
+
+            // curved arrow to indicate clockwise rotation
+            p.push();
+            p.noFill();
+            p.stroke(0);
+            p.strokeWeight(2);
+            p.arc(0, 0, 50, 50, p.HALF_PI, p.TWO_PI);
+            p.fill(0);
+            p.noStroke();
+            p.pop();
+
+            p.push();
+            p.fill(0);
+            p.rotate(p.TWO_PI * 0.98);
+            if (this.name === "lowerLeft" || this.name === "lowerRight") {
+              p.translate(5, 24);
+
+              p.triangle(0, 0, -10, -5, -10, 5);
+            } else {
+              p.translate(30, 4);
+              p.triangle(0, 0, -10, -5, -10, 5);
+            }
+            p.pop();
+          } else {
+            p.fill(this.color);
+            p.stroke(100);
+            p.ellipse(0, 0, this.radius * 2, this.radius * 2);
+          }
+
+          p.noFill();
+          p.stroke(255, 255, 255);
+          p.circle(0, 0, this.radius * 2);
+
+          p.fill("#444");
+          p.noStroke();
+          p.circle(0, 0, this.spacing * 1.5);
+          p.pop();
+        }
+      }
+
+      new p5((p) => {
+        // Declare gear variables
+        let gearDrive,
+          gearMain,
+          gearTopLeft,
+          gearDialOuter,
+          gearDialInner,
+          gearLowerLeft,
+          gearLowerRight;
+        let centerX, centerY, faceRadius;
+
+        p.setup = () => {
+          p.createCanvas(1200, 950).parent("canvas-parent");
+          p.angleMode(p.RADIANS);
+
+          centerX = p.width / 2;
+          centerY = p.height / 2;
+          faceRadius = Math.min(p.width, p.height) * 0.3;
+          const spacing = faceRadius * 0.03;
+
+          // teeth counts
+          const teethDrive = 16;
+          const teethMain = 30;
+          const teethTopLeft = 20;
+          const teethDialOuter = 36;
+          const teethDialInner = 18;
+          const teethLowerLeft = 10;
+          const teethLowerRight = 10;
+
+          // gear radii
+          const radiusDrive = faceRadius * 0.15;
+          const radiusMain = faceRadius * 0.45;
+          const radiusTopLeft = faceRadius * 0.2;
+          const radiusDialOuter = faceRadius * 0.3;
+          const radiusDialInner = faceRadius * 0.16;
+          const radiusLowerLeft = 36;
+          const radiusLowerRight = 30;
+
+          // gear instances with positions and configurations
+          gearDrive = new Gear(
+            centerX,
+            centerY,
+            teethDrive,
+            radiusDrive,
+            spacing,
+            "drive"
+          );
+          gearMain = new Gear(
+            centerX,
+            centerY,
+            teethMain,
+            radiusMain - 20,
+            spacing,
+            "main"
+          );
+
+          const dTopLeft = radiusMain + radiusTopLeft + spacing;
+          gearTopLeft = new Gear(
+            centerX - dTopLeft + 19,
+            centerY - dTopLeft / 2 + 8,
+            teethTopLeft,
+            radiusTopLeft,
+            spacing,
+            "topleft",
+            "#732a08"
+          );
+
+          const dDial = radiusMain + radiusDialOuter + spacing;
+          gearDialOuter = new Gear(
+            centerX + dDial - 70,
+            centerY + 100,
+            teethDialOuter,
+            radiusDialOuter,
+            spacing,
+            "dialOuter"
+          );
+          gearDialOuter.skipTeeth = true;
+
+          gearDialInner = new Gear(
+            gearDialOuter.x,
+            gearDialOuter.y,
+            teethDialInner,
+            radiusDialInner,
+            spacing,
+            "dialInner"
+          );
+
+          gearLowerLeft = new Gear(
+            centerX - dTopLeft + 41,
+            centerY + 12,
+            teethLowerLeft,
+            radiusLowerLeft,
+            spacing,
+            "lowerLeft"
+          );
+          gearLowerRight = new Gear(
+            centerX + dTopLeft - 118,
+            centerY + dTopLeft / 2 + 30,
+            teethLowerRight,
+            radiusLowerRight,
+            spacing,
+            "lowerRight"
+          );
+
+
+          // initial angular velocities
+          gearDrive.angularVel = 0.4;
+          gearMain.angularVel = 0.4;
+          gearTopLeft.angularVel = 0.6;
+        };
+
+        p.draw = () => {
+          p.background(250);
+
+          // watch bezel
+          p.push();
+          p.translate(centerX, centerY);
+          p.stroke(0);
+          p.strokeWeight(20);
+          p.noFill();
+          p.circle(0, 0, faceRadius * 2.28);
+          p.pop();
+
+          // angular velocities for gears
+          gearMain.angularVel = 0.4;
+          gearDialOuter.angularVel = 0;
+          gearDialInner.angularVel =
+            -gearMain.angularVel * (gearMain.teeth / gearDialOuter.teeth);
+          gearLowerLeft.angularVel = -1.2;
+          gearLowerRight.angularVel = -1.2;
+
+          // all gears
+          const deltaTime = p.deltaTime / 1000;
+          [
+            gearMain,
+            gearDrive,
+            gearTopLeft,
+            gearDialInner,
+            gearLowerLeft,
+            gearLowerRight,
+            gearDialOuter,
+          ].forEach((gear) => {
+            gear.update(deltaTime);
+            gear.draw(p);
+          });
+
+          // Calculate seconds, minute and hour values
+          const now = new Date();
+          const seconds = now.getSeconds() + now.getMilliseconds() / 1000;
+          const minutes = now.getMinutes() + seconds / 60;
+          const hours = (now.getHours() % 12) + minutes / 60;
+
+          p.push();
+          p.translate(gearDialOuter.x, gearDialOuter.y);
+          p.stroke(0);
+          for (let i = 0; i < 60; i++) {
+            const angle = (p.TWO_PI * i) / 60 - p.HALF_PI;
+            const outer = gearDialOuter.radius;
+            const tickLen = i % 5 === 0 ? outer * 0.12 : outer * 0.06;
+            p.push();
+            p.rotate(angle);
+            p.line(0, -outer, 0, -outer + tickLen);
+            p.pop();
+          }
+          p.stroke(200, 0, 0);
+          p.strokeWeight(2);
+          p.rotate((p.TWO_PI * seconds) / 60 - p.HALF_PI);
+          p.line(0, 0, 0, -gearDialOuter.radius * 0.9);
+          p.pop();
+
+          // minute hand
+          p.push();
+          p.translate(centerX, centerY);
+          p.stroke(0);
+          p.strokeWeight(3);
+          p.rotate((p.TWO_PI * minutes) / 60 - p.HALF_PI);
+          p.line(0, 0, 0, -faceRadius * 0.8);
+          p.pop();
+
+          // hour hand
+          p.push();
+          p.translate(centerX, centerY);
+          p.stroke(0);
+          p.strokeWeight(5);
+          p.rotate((p.TWO_PI * hours) / 12 - p.HALF_PI);
+          p.line(0, 0, 0, -faceRadius * 0.6);
+          p.pop();
+
+          // minute tick marks on main dial
+          p.push();
+          p.translate(centerX, centerY);
+          p.stroke(0);
+          for (let i = 0; i < 60; i++) {
+            const angle = (p.TWO_PI * i) / 60 - p.HALF_PI;
+            const outer = faceRadius * 1.1;
+            const tickLen = i % 5 === 0 ? faceRadius * 0.08 : faceRadius * 0.04;
+            p.push();
+            p.rotate(angle);
+            p.line(0, -outer, 0, -outer + tickLen);
+            p.pop();
+          }
+          p.pop();
+
+          // hour numerals
+          p.push();
+          p.translate(centerX, centerY);
+          p.fill(0);
+          p.noStroke();
+          p.textAlign(p.CENTER, p.CENTER);
+          p.textSize(faceRadius * 0.1);
+          for (let h = 1; h <= 12; h++) {
+            const angle = (p.TWO_PI * h) / 12 - p.HALF_PI;
+            const radius = faceRadius * 0.95;
+            p.text(h.toString(), radius * p.cos(angle), radius * p.sin(angle));
+          }
+          p.pop();
+        };
+      });
+    </script>
+  </body>
+</html>

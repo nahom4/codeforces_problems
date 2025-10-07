@@ -1,0 +1,895 @@
+Chapter 7
+Understanding Cloud Security and
+Cybersecurity
+7.1 Basic Security Terminology
+7.2 Basic Threat Terminology
+7.3 Threat Agents
+7.4 Common Threats
+7.5 Case Study Example
+7.6 Additional Considerations
+7.7 Case Study Example
+This chapter introduces terms and concepts that address basic
+information security within clouds, and then concludes by
+deﬁning a set of threats and attacks common to public cloud
+environments. The cloud security and cybersecurity
+mechanisms covered in Chapters 10 and 11 establish the
+security controls used to counter these threats.
+7.1 Basic Security Terminology
+Information security is a complex ensemble of techniques,
+technologies, regulations, and behaviors that collaboratively
+protect the integrity of and access to computer systems and
+data. IT security measures aim to defend against threats and
+interference that arise from both malicious intent and
+unintentional user error.
+The upcoming sections deﬁne fundamental security terms
+relevant to cloud computing and describe associated concepts.
+Conﬁdentiality
+Conﬁdentiality is the characteristic of something being made
+accessible only to authorized parties (Figure 7.1). Within cloud
+environments, conﬁdentiality primarily pertains to restricting
+access to data in transit and storage.
+Figure 7.1
+The message issued by the cloud consumer to the cloud service is
+considered conﬁdential only if it is not accessed or read by an
+unauthorized party.
+Integrity
+Integrity is the characteristic of not having been altered by an
+unauthorized party (Figure 7.2). An important issue that
+concerns data integrity in the cloud is whether a cloud
+consumer can be guaranteed that the data it transmits to a
+cloud service matches the data received by that cloud service.
+Integrity can extend to how data is stored, processed, and
+retrieved by cloud services and cloud-based IT resources.
+Figure 7.2
+The message issued by the cloud consumer to the cloud service is
+considered to have integrity if it has not been altered.
+Availability
+Availability is the characteristic of being accessible and usable
+during a speciﬁed time period. In typical cloud environments,
+the availability of cloud services can be a responsibility that is
+shared by the cloud provider and the cloud carrier. The
+availability of a cloud-based solution that extends to cloud
+service consumers is further shared by the cloud consumer.
+Figure 7.3 depicts a scenario that demonstrates how a collection
+of security technologies helps ensure the conﬁdentiality and
+integrity of data exchange over the Internet, as well as the
+availability of a central database containing private data.
+Figure 7.3
+A hospital contributes conﬁdential medical data to a database in
+a cloud (1) shared by a research institution that retrieves the data
+(2). Supporting cybersecurity technologies provide conﬁdentiality
+via encryption, integrity via runtime scanning and availability by
+ensuring the on-going safety of the shared cloud-based database.
+Authenticity
+Authenticity is the characteristic of something having been
+provided by an authorized source. This concept encompasses
+non-repudiation, which is the inability of a party to deny or
+challenge the authentication of an interaction. Authentication
+in non-repudiable interactions provides proof that these
+interactions are uniquely linked to an authorized source. For
+example, a user may not be able to access a non-repudiable ﬁle
+after its receipt without also generating a record of this access.
+Security Controls
+Security controls are countermeasures used to prevent or
+respond to security threats and to reduce or avoid risk. Details
+on how to use security countermeasures are typically outlined
+in the security policy, which contains a set of rules and practices
+specifying how to implement a system, service, or security plan
+for maximum protection of sensitive and critical IT resources.
+Security Mechanisms
+Countermeasures are typically described in terms of security
+mechanisms, which are components comprising a defensive
+framework that protects IT resources, information, and
+services. Chapters 10 and 11 describe a series of cloud security
+and cybersecurity mechanisms.
+Security Policies
+A security policy establishes a set of security rules and
+regulations. Often, security policies will further deﬁne how
+these rules and regulations are implemented and enforced. For
+example, the positioning and usage of security controls and
+mechanisms can be determined by security policies.
+7.2 Basic Threat Terminology
+This section covers some fundamental topics that help establish
+the primary purpose and scope of cybersecurity practices and
+technologies, as well as some essential vocabulary.
+The following section provides descriptions of fundamental
+terms associated with cybersecurity threats.
+Risk
+Risk is the potential unwanted and unexpected loss that may
+result from a given action. Risks can pertain to various aspects
+of cybersecurity, including external threats, internal
+vulnerabilities, responses carried out against threats, as well as
+risks associated with possible human error, technology
+malfunctions and the overall quality of a cybersecurity
+environment.
+Vulnerability
+A vulnerability, within the context of cybersecurity, is a ﬂaw, gap
+or weakness in an IT environment or associated policies or
+processes that leaves an organization open to potentially
+successful security breaches. Vulnerabilities can be physical or
+digital. Attackers attempt to exploit vulnerabilities, while
+organizations attempt to eliminate or mitigate them.
+Exploit
+An exploit occurs when an attacker is able to take advantage of
+a vulnerability.
+Zero-Day Vulnerability
+A zero-day vulnerability is a vulnerability that an organization is
+either unaware of or for which it has not been able to yet
+provide a patch or ﬁx. As a result, an attacker may be able to
+more easily exploit this vulnerability until the organization is
+able to address it.
+Security Breach
+A security breach is any incident that may result in
+unauthorized access to information or systems. It typically
+occurs when an attacker is able to bypass security mechanisms
+and controls.
+Data Breach
+A data breach is a type of security breach whereby an attacker is
+able to steal conﬁdential information.
+Data Leak
+A data leak occurs when sensitive information is shared with
+unauthorized parties without an attack taking place. Data leaks
+can occur accidentally or intentionally and are usually carried
+out by humans.
+Threat (or Cyber Threat)
+A threat or a cyber threat is a known, potential attack that poses
+danger and risk to an organization. The collection of threats
+relevant to a given organization is known as the threat
+landscape or cyber threat landscape.
+Attack (or Cyber Attack)
+When a threat is carried out by an attacker, it becomes an
+attack or a cyber attack.
+Attacker and Intruder
+Within the context of cloud security and cybersecurity, an
+attacker is an individual or organization that carries out cyber
+attacks.
+There are diﬀerent types of attackers:
+• Cyber Criminals — Attackers that attempt to steal private
+information for the purpose of proﬁt or other types of illegal
+activity.
+• Malicious Users — An authorized user, such as a rogue
+employee, who abuses trusted privileges to access a system with
+the intent to cause harm or carry out unauthorized actions.
+• Cyber Activists — Attackers that carry out malicious activity to
+promote a political agenda, religious belief or social ideology.
+• State-Sponsored Attackers — Attackers who are hired by a
+government agency.
+Any attacker that has successfully gained unauthorized access
+within an organizational boundary is known as an intruder.
+Attack Vector and Surface
+An attack vector is the path that an attacker takes to exploit
+vulnerabilities. Examples of attack vectors are email
+attachments, pop-up windows, chat rooms and instant
+messages. Human error or ignorance are commonly planned
+for when creating a given attack vector. An attack surface is a
+collection of attack vectors from where an attacker can access a
+system or extract information.
+7.3 Threat Agents
+A threat agent is an entity that poses a threat because it is
+capable of carrying out an attack. Cloud security threats can
+originate either internally or externally, from humans or
+software programs. Corresponding threat agents are described
+in the upcoming sections. Figure 7.4 illustrates the role a threat
+agent assumes in relation to vulnerabilities, threats, and risks,
+and the safeguards established by security policies and security
+mechanisms.
+Figure 7.4
+How security policies and security mechanisms are used to
+counter threats, vulnerabilities, and risks caused by threat agents.
+Anonymous Attacker
+An anonymous attacker is a non-trusted cloud service consumer
+without permissions in the cloud (Figure 7.5). It typically exists
+as an external software program that launches network-level
+attacks through public networks. When anonymous attackers
+have limited information on security policies and defenses, it
+can inhibit their ability to formulate eﬀective attacks. Therefore,
+anonymous attackers often resort to committing acts like
+bypassing user accounts or stealing user credentials, while
+using methods that either ensure anonymity or require
+substantial resources for prosecution.
+Figure 7.5
+The notation used for an anonymous attacker.
+Malicious Service Agent
+A malicious service agent is able to intercept and forward the
+network traﬃc that ﬂows within a cloud (Figure 7.6). It typically
+exists as a service agent (or a program pretending to be a
+service agent) with compromised or malicious logic. It may also
+exist as an external program able to remotely intercept and
+potentially corrupt message contents.
+
+Figure 7.6
+The notation used for a malicious service agent.
+Trusted Attacker
+A trusted attacker shares IT resources in the same cloud
+environment as the cloud consumer and attempts to exploit
+legitimate credentials to target cloud providers and the cloud
+tenants with whom they share IT resources (Figure 7.7). Unlike
+anonymous attackers (which are non-trusted), trusted attackers
+usually launch their attacks from within a cloud’s trust
+boundaries by abusing legitimate credentials or via the
+appropriation of sensitive and conﬁdential information.
+Figure 7.7
+The notation that is used for a trusted attacker.
+Trusted attackers (also known as malicious tenants) can use
+cloud-based IT resources for a wide range of exploitations,
+including the hacking of weak authentication processes, the
+breaking of encryption, the spamming of e-mail accounts, or to
+launch common attacks, such as denial of service campaigns.
+Malicious Insider
+Malicious insiders are human threat agents acting on behalf of
+or in relation to the cloud provider. They are typically current
+or former employees or third parties with access to the cloud
+provider’s premises. This type of threat agent carries
+tremendous damage potential, as the malicious insider may
+have administrative privileges for accessing cloud consumer IT
+resources.
+Note
+A notation used to represent a general form of
+human-driven attack is the workstation combined
+with a lightning bolt (Figure 7.8). This generic
+symbol does not imply a speciﬁc threat agent, only
+that an attack was initiated via a workstation.
+Figure 7.8
+The notation used for an attack originating from a workstation.
+The human symbol is optional.
+7.4 Common Threats
+This section introduces several common threats and
+vulnerabilities in cloud-based environments and describes the
+roles of the aforementioned threat agents.
+Traﬃc Eavesdropping
+Tra c eavesdropping occurs when data being transferred to or
+within a cloud (usually from the cloud consumer to the cloud
+provider) is passively intercepted by a malicious service agent
+for illegitimate information gathering purposes (Figure 7.9). The
+aim of this attack is to directly compromise the conﬁdentiality
+of the data and, possibly, the conﬁdentiality of the relationship
+between the cloud consumer and cloud provider. Because of
+the passive nature of the attack, it can more easily go
+undetected for extended periods of time.
+Figure 7.9
+An externally positioned malicious service agent carries out a
+tra c eavesdropping attack by intercepting a message sent by
+the cloud service consumer to the cloud service. The service agent
+makes an unauthorized copy of the message before it is sent along
+its original path to the cloud service.
+Malicious Intermediary
+The malicious intermediary threat arises when messages are
+intercepted and altered by a malicious service agent, thereby
+potentially compromising the message’s conﬁdentiality and/or
+integrity. It may also insert harmful data into the message
+before forwarding it to its destination. Figure 7.10 illustrates a
+common example of the malicious intermediary attack.
+Figure 7.10
+The malicious service agent intercepts and modiﬁes a message
+sent by a cloud service consumer to a cloud service (not shown)
+being hosted on a virtual server. Because harmful data is
+packaged into the message, the virtual server is compromised.
+Note
+While not as common, the malicious intermediary
+attack can also be carried out by a malicious cloud
+service consumer program.
+Denial of Service
+The objective of the denial of service (DoS) attack is to overload
+IT resources to the point where they cannot function properly.
+This form of attack is commonly launched in one of the
+following ways:
+• The workload on cloud services is artiﬁcially increased with
+imitation messages or repeated communication requests.
+• The network is overloaded with traﬃc to reduce its
+responsiveness and cripple its performance.
+• Multiple cloud service requests are sent, each of which is
+designed to consume excessive memory and processing
+resources.
+Successful DoS attacks produce server degradation and/or
+failure, as illustrated in Figure 7.11.
+Figure 7.11
+Cloud Service Consumer A sends multiple messages to a cloud
+service (not shown) hosted on Virtual Server A. This overloads the
+capacity of the underlying physical server, which causes outages
+with Virtual Servers A and B. As a result, legitimate cloud service
+consumers, such as Cloud Service Consumer B, become unable to
+communicate with any cloud services hosted on Virtual Servers A
+and B.
+Note
+A common variation of the DoS attack is the DDoS
+(distributed denial of service) attack, in which
+multiple compromised systems are used to ﬂood a
+targeted website or network with traﬃc, in an
+attempt to make it unavailable.Insuﬃcient
+Authorization
+The insuﬃcient authorization attack occurs when access is
+granted to an attacker erroneously or too broadly, resulting in
+the attacker getting access to IT resources that are normally
+protected. This is often a result of the attacker gaining direct
+access to IT resources that were implemented under the
+assumption that they would only be accessed by trusted
+consumer programs (Figure 7.12).
+Figure 7.12
+Cloud Service Consumer A gains access to a database that was
+implemented under the assumption that it would only be accessed
+through a Web service with a published service contract (as per
+Cloud Service Consumer B).
+A variation of this attack, known as weak authentication, can
+result when weak passwords or shared accounts are used to
+protect IT resources. Within cloud environments, these types of
+attacks can lead to signiﬁcant impacts depending on the range
+of IT resources and the range of access to those IT resources the
+attacker gains (Figure 7.13).
+Figure 7.13
+An attacker has cracked a weak password used by Cloud Service
+Consumer A. As a result, a malicious cloud service consumer
+(owned by the attacker) is designed to pose as Cloud Service
+Consumer A in order to gain access to the cloud-based virtual
+server.
+Virtualization Attack
+Virtualization provides multiple cloud consumers with access to
+IT resources that share underlying hardware but are logically
+isolated from each other. Because cloud providers grant cloud
+consumers administrative access to virtualized IT resources
+(such as virtual servers), there is an inherent risk that cloud
+consumers could abuse this access to attack the underlying
+physical IT resources.
+A virtualization attack exploits vulnerabilities in the
+virtualization platform to jeopardize its conﬁdentiality, integrity,
+and/or availability. This threat is illustrated in Figure 7.14,
+where a trusted attacker successfully accesses a virtual server
+to compromise its underlying physical server. With public
+clouds, where a single physical IT resource may be providing
+virtualized IT resources to multiple cloud consumers, such an
+attack can have signiﬁcant repercussions.
+Figure 7.14
+An authorized cloud service consumer carries out a virtualization
+attack by abusing its administrative access to a virtual server to
+exploit the underlying hardware.
+Overlapping Trust Boundaries
+If physical IT resources within a cloud are shared by diﬀerent
+cloud service consumers, these cloud service consumers have
+overlapping trust boundaries. Malicious cloud service
+consumers can target shared IT resources with the intention of
+compromising cloud consumers or other IT resources that
+share the same trust boundary. The consequence is that some
+or all of the other cloud service consumers could be impacted
+by the attack and/or the attacker could use virtual IT resources
+against others that happen to also share the same trust
+boundary.
+Figure 7.15 illustrates an example in which two cloud service
+consumers share virtual servers hosted by the same physical
+server and, resultantly, their respective trust boundaries
+overlap.
+Figure 7.15
+Cloud Service Consumer A is trusted by the cloud and therefore
+gains access to a virtual server, which it then attacks with the
+intention of attacking the underlying physical server and the
+virtual server used by Cloud Service Consumer B.
+Containerization Attack
+The use of containerization introduces a lack of isolation from
+the host operating system level. Since containers deployed on
+the same machine share the same host operating system,
+security threats can increase because access to the entire
+system can be gained. If the underlying host is compromised, all
+containers running on the host may be impacted.
+Containers can be created from within an operating system
+running on a virtual server. This can help ensure that if a
+security breach occurs that impacts the operating system a
+container is running on, the attacker can only gain access to
+and alter the virtual server’s operating system or the containers
+running on a single virtual server, while other virtual servers
+(or physical servers) remain intact.
+Another option is a one-service per physical server deployment
+model where all container images deployed on the same host
+are the same. This can reduce risk without the need to
+virtualize the IT resources. In this case, a security breach to one
+cloud service instance would only allow access to other
+instances, and the residual risk could be considered as
+acceptable. However, this approach may not be optimal for
+deploying many diﬀerent cloud services because it can
+signiﬁcantly increase the total number of physical IT resources
+that need to be deployed and managed while further increasing
+cost and operational complexity.
+Malware
+Malware, also referred to as malicious software, is a type of
+software program designed to cause harm to a computer system
+or network.
+Malware can be used to perform a variety of malicious
+activities, including:
+• stealing protected data
+• deleting conﬁdential documents
+• listening to private communication
+• collecting information about conﬁdential activity
+The fundamental basis of a malware attack is the installation of
+unauthorized software on the victim’s computer (Figure 7.16).
+Figure 7.16
+An attacker making a server available to a user (via a website, for
+example) who inadvertently downloads malware to a local
+workstation.
+The following are common types of malware-based cyber
+attacks:
+• Virus — Malware that can spread by infecting systems and ﬁles
+with code that enables the virus to replicate and perform
+additional actions on the infected system.
+• Trojan — A piece of malicious software that appears to be a
+legitimate application or service. A trojan can engage in
+malicious behavior, often as part of background processes, to
+carry out activities such as installing backdoor code and
+injecting code into other running processes. A trojan may or
+may not contain a virus.
+• Spyware — A type of malware that collects information about
+users or organizations without their knowledge.
+• Adware — Software designed to display unwanted
+advertisements or pop-ups. Adware can be considered a
+security threat because it can collect sensitive information and
+may slow down systems and make them vulnerable to other
+types of malware.
+• Ransomware — Malware that restricts or prevents data usage or
+access with the purpose of demanding payment of a fee to
+decrypt or release the data. An on-going ransomware attack can
+be carried out using remote code execution (as covered later in
+this section).
+• Bot — Malware capable of remotely receiving commands and
+reporting information to a remote destination. A bot is usually
+designed to work together with other bots (as per the Botnet
+threat covered later in this section).
+• Rogue Antivirus — An application claiming to be an antivirus
+program that, once installed, falsely reports security issues to
+mislead victims into purchasing a “full” version of the program.
+• Crypto Jacking — The practice of using browser-based programs
+that run scripts embedded in web content to mine
+cryptocurrency without the user’s knowledge or consent.
+• Worm — A self-replicating, self-propagating, self-contained
+program that uses network mechanisms to spread itself. Worms
+do not usually cause much harm beyond using up computing
+resources and are generally not common.
+Data science technologies can be used to support malware
+attacks by analyzing systems in order to discover and identify
+new vulnerabilities that can be exploited by malware programs.
+These technologies can further enable the development of
+reactive malicious code that can, itself, look for new
+vulnerabilities.
+Insider Threat
+An insider threat is associated with potential damage that can
+be inﬂicted by an organization’s staﬀ and others that may have
+access to the organization’s premises or systems.
+Common types of insider threats include the following (Figure
+7.17):
+• malicious — attempts by an insider (such as a disgruntled
+employee) to access and potentially harm an organization's
+data, systems or IT infrastructure
+• accidental — accidental damage caused by insiders making
+mistakes out of ignorance or due to human error, such as
+accidentally deleting an important ﬁle or inadvertently sharing
+conﬁdential data with an unauthorized party
+• negligent — accidental damage caused by insiders due to
+carelessness or an unwillingness to following established
+cybersecurity standards and policies
+Figure 7.17
+Examples of malicious (left), negligent (middle) and accidental
+(right) insiders posing threats to an organization.
+Insider threats can put organizational assets in danger,
+including physical hardware, physical product inventory,
+corporate websites, social media communication and
+information assets.
+Social Engineering and Phishing
+Social engineering is a form of attack where individuals are
+tricked into revealing sensitive information or performing
+potentially damaging actions, such as granting access to
+unauthorized parties (Figure 7.18). Social engineering tactics
+are popular because it can be easier to exploit people than it is
+to exploit technology.
+Figure 7.18
+An example of an attacker attempting to carry out a social
+engineering attack by extracting sensitive information from an
+employee who may be working for a cloud consumer or cloud
+provider organization.
+Phishing is a form of social engineering that uses electronic
+communication, such as sending fraudulent emails that appear
+to come from valid sources, in an attempt to coerce users into
+releasing sensitive information, triggering a security breach or
+performing other damaging actions.
+Botnet
+As described earlier in the Malware section, a bot is a form of
+malware capable of receiving and acting upon instructions
+issued by a remote attacker. A botnet attack utilizes multiple
+bots that are distributed across diﬀerent hosts in order to carry
+out an attack via a coordinated network of bots (a bot-net).
+A common technique for carrying out a botnet attack is to start
+with an initial malware infection to create “zombie” hosts. A
+zombie host is a computer that belongs to an unsuspecting,
+legitimate organization that an attacker has taken control of.
+The attacker then typically uses the zombie host to carry out
+attacks against another party (Figure 7.19).
+Figure 7.19
+An attacker has turned a regular server at Organization A into a
+zombie server that is controlled by the attacker to transmit
+malware to a user’s computer at Organization B.
+A botnet can be comprised of bots located on host servers that
+belong to the attacker, as well as zombie servers. Once installed,
+a bot seeks to connect with other bots on other infected hosts
+and devices to form a network that the attacker can use to
+perform malicious actions (Figure 7.20), such as carrying out
+large-scale DDoS attacks, crypto jacking attacks, sending mass
+emails with harmful content, stealing data or even recruiting
+new bots. Botnets can be purchased on the dark web and can be
+even rented for short periods.
+
+Figure 7.20
+An attacker has turned regular servers at Organizations A and B
+into zombie servers. The attacker uses these servers together with
+some local servers to carry out an attack on Organization C.
+Note that botnet attacks often encompass other attacks and
+techniques, such as remote code execution, privilege escalation,
+social engineering and insider threats.
+Privilege Escalation
+A privilege escalation attack occurs when an attacker attempts
+to gain administrator permissions after compromising a user
+account with limited access privileges (Figure 7.21). This can be
+done by exploiting vulnerabilities that unintentionally allow a
+user account’s access levels to be increased.
+Figure 7.21
+An attacker is able to inﬁltrate an employee’s user account and
+then exploit a vulnerability to upgrade access privileges.
+Data science technologies can be used to support privilege
+escalation attacks by developing models that can be used to
+continuously search and analyze potential victim user accounts
+and systems for exploitable vulnerabilities. For example,
+another attack could be employed to collect data about how
+current systems in a network are with regards to third-party
+software patches. The data science system may be able to
+process this information, along with additional data about the
+third-party software programs and how they are conﬁgured in
+the target environment in order to produce a set of
+recommended target areas.
+Brute Force
+In a brute force attack, an attacker attempts a broad range of
+possible username and password combinations to try to
+determine which one combination is correct and enables the
+attacker to gain unauthorized access to a system (Figure 7.22).
+Figure 7.22
+An attacker issues a brute force attack by bombarding a website
+with a series of username and password combinations.
+As such, password-only systems are most vulnerable to brute
+force attacks and user accounts with weak passwords are those
+most easily accessed.
+The simplest type of brute force attack is a dictionary attack in
+which the attacker reads from a dictionary of possible
+passwords and essentially tries them all. Credential recycling is
+another variation whereby usernames and passwords from
+prior data breaches are reused to try to break into other
+systems.
+Remote Code Execution
+Remote code execution is a cyber attack in which an attacker
+remotely executes commands on a third party’s computing
+device.
+Examples of how this attack can succeed include:
+• malicious software (malware) being downloaded by the host
+(Figure 7.23)
+• using tunneling to gain remote access to run host server or
+database commands or to control system and OS services
+This attack can also be enabled by the attacker obtaining login
+credentials to the host computer via a brute force or Wi-Fi
+deauthentication attack, or via social engineering and insider
+threats. A remote code execution attack is usually prefaced by
+an information gathering process in which the attacker uses an
+automated scanning tool to identify vulnerabilities.
+Figure 7.23
+Using an already installed malware program, an attacker is able
+to issue it commands to carry out damaging actions on an
+organization’s server.
+The remote code execution technique can be utilized by other
+cyber attacks, such as botnet attacks and malware attacks that
+utilize ransomware or trojans.
+SQL Injection
+SQL injection is a technique used to attack applications in which
+malicious code in the form of SQL statements is inserted into an
+entry ﬁeld on a web application user interface, causing the web
+application server to execute the malicious code (Figure 7.24).
+Figure 7.24
+An attacker inserts harmful SQL code into a web application’s
+user interface.
+When successful, access to the server can be compromised,
+resulting in malware being written into the server’s database.
+Attackers often use search engines to identify vulnerable sites
+that can be altered using SQL injection.
+Note
+SQL (or the Structured Query Language) is a syntax
+used to issue commands to a database, such as
+queries and updates.
+Data science technologies can be used to support SQL injection
+attacks by analyzing historical SQL commands that have been
+issued against a given web application to better determine
+which are more or less eﬀective. The data science system itself
+can help generate diﬀerent combinations of SQL code for
+automated attacks, learning from and improving over time,
+based on the successful or failed outcome of each code
+submission.
+Tunneling
+Tunneling is a technique whereby data is embedded in an
+authorized protocol packet to bypass ﬁrewall controls, allowing
+sensitive data to exit the network and unauthorized or
+malicious data to enter without ever triggering an alert or log
+entry (Figure 7.25). Tunneling can be diﬃcult to detect and
+block because tunneling packets are designed to adhere to the
+rules of ﬁrewalls.
+Figure 7.25
+An attacker is able to get a malicious packet through an
+organization’s ﬁrewall, thereby enabling the attacker to set up a
+tunnel to an internal server.
+In order to “tunnel” the data, the attacker uses a software
+program that can pretend to talk to the protocol but, in reality,
+transfers data for some other purpose. For example, an
+established tunnel can be used to place malware on the victim’s
+computer, such as spyware that remains on a host for a
+prolonged period to collect conﬁdential information. It can also
+be used with remote code execution in support of a botnet
+attack by enabling the attacker to place bots on hosts for the
+purpose of turning them into zombie servers.
+Note
+Commonly used protocols for attacking systems
+using tunneling techniques include HTTP, SSH,
+DNS, and ICMP.
+Advanced Persistent Threat (APT)
+An advanced persistent threat (APT) is a method whereby an
+attacker uses multiple attacks to breach security. Often, the
+attacks are coordinated to take place over a longer period of
+time (Figure 7.26). APTs require sophisticated technology and
+long-term preparation and planning by the attacker, and are
+therefore more common with attackers that target high-value
+organizations.
+
+Figure 7.26
+A set of coordinated attacks is carried out against an
+organization over a period of time. The diﬀerent attacks are
+carried out in a speciﬁc sequence and in support of a common
+objective.
+An objective behind APTs can be to position resources within an
+organization’s environment subsequent to gaining access via a
+security breach. For example, an APT attack may succeed in
+gaining access to a network after which the attacker tries to
+establish a foothold by implanting malware that creates
+backdoors and tunnels that are then used to continue to
+persistently attack systems over a longer period of time.
+The attacker may then attempt to deepen access by using
+techniques, such as brute force attacks, to gain administrator
+rights that then enable the attacker to take control of system
+resources and perhaps even lock others out.
+Because successful APT attacks are carried out as a larger
+campaign over longer periods of time, they enable attackers to
+observe and learn about an environment to discover further
+ways to harvest information or value (or do more damage) than
+the attacker originally planned.
+A critical success factor with APT attacks is often human
+involvement. Many APT attacks succeed as a result of an insider
+threat, which can be a human who (possibly inadvertently) has
+compromised security via social engineering or phishing
+techniques.
+Note
+Groups of attackers that collectively carry out APT
+attacks are known as APT groups. An APT group
+can include access brokers that only obtain and sell
+access information to attackers. For example, the
+use of access brokers is common among
+ransomware attackers.
+7.5 Case Study Example
+DTGOV, acting as a third-party provider to so
+many diﬀerent government organizations,
+undergoes a review to identify which threats it
+will likely be most vulnerable to.
+The results indicate the following primary
+concerns:
+• virtualization attacks, because it is a completely
+new type of attack it had not been prepared for
+before using cloud services on behalf of its
+customers,
+• overlapping trust boundaries, given that all of
+its customers will now be sharing resources
+from a cloud provider, they will be subject to
+this new threat,
+• social engineering and phishing, due to the fact
+that, as a service provider, it has no control
+over the behavior of the end users of the
+systems it runs and manages.
+DTGOV plans to mitigate all of these threats by
+revising its customer agreements and by
+utilizing a number of the security mechanisms
+covered in Chapters 10 and 11.
+7.6 Additional Considerations
+This section provides a diverse checklist of issues and
+guidelines that relate to cloud security. The listed considerations
+are in no particular order.
+Flawed Implementations
+The substandard design, implementation, or conﬁguration of
+cloud service deployments can have undesirable consequences,
+beyond runtime exceptions and failures. If the cloud provider’s
+software and/or hardware have inherent security ﬂaws or
+operational weaknesses, attackers can exploit these
+vulnerabilities to impair the integrity, conﬁdentiality, and/or
+availability of cloud provider IT resources and cloud consumer
+IT resources hosted by the cloud provider.
+Figure 7.27 depicts a poorly implemented cloud service that
+results in a server shutdown. Although in this scenario the ﬂaw
+is exposed accidentally by a legitimate cloud service consumer,
+it could have easily been discovered and exploited by an
+attacker.
+Figure 7.27
+Cloud Service Consumer A’s message triggers a conﬁguration ﬂaw
+in Cloud Service A, which in turn causes the virtual server that is
+also hosting Cloud Services B and C to crash.
+Security Policy Disparity
+When a cloud consumer places IT resources with a public cloud
+provider, it may need to accept that its traditional information
+security approach may not be identical or even similar to that of
+the cloud provider. This incompatibility needs to be assessed to
+ensure that any data or other IT assets being relocated to a
+public cloud are adequately protected. Even when leasing raw
+infrastructure-based IT resources, the cloud consumer may not
+be granted suﬃcient administrative control or inﬂuence over
+security policies that apply to the IT resources leased from the
+cloud provider. This is primarily because those IT resources are
+still legally owned by the cloud provider and continue to fall
+under its responsibility.
+Furthermore, with some public clouds, additional third parties,
+such as security brokers and certiﬁcate authorities, may
+introduce their own distinct set of security policies and
+practices, further complicating any attempts to standardize the
+protection of cloud consumer assets.
+Contracts
+Cloud consumers need to carefully examine contracts and SLAs
+put forth by cloud providers to ensure that security policies, and
+other relevant guarantees, are satisfactory when it comes to
+asset security. There needs to be clear language that indicates
+the amount of liability assumed by the cloud provider and/or
+the level of indemnity the cloud provider may ask for. The
+greater the assumed liability by the cloud provider, the lower
+the risk to the cloud consumer.
+Another aspect to contractual obligations is where the lines are
+drawn between cloud consumer and cloud provider assets. A
+cloud consumer that deploys its own solution upon
+infrastructure supplied by the cloud provider will produce a
+technology architecture comprised of artifacts owned by both
+the cloud consumer and cloud provider. If a security breach (or
+other type of runtime failure) occurs, how is blame determined?
+Furthermore, if the cloud consumer can apply its own security
+policies to its solution, but the cloud provider insists that its
+supporting infrastructure be governed by diﬀerent (and
+perhaps incompatible) security policies, how can the resulting
+disparity be overcome?
+Sometimes the best solution is to look for a diﬀerent cloud
+provider with more compatible contractual terms.
+Risk Management
+When assessing the potential impacts and challenges pertaining
+to cloud adoption, cloud consumers are encouraged to perform
+a formal risk assessment as part of a risk management strategy.
+A cyclically executed process used to enhance strategic and
+tactical security, risk management is comprised of a set of
+coordinated activities for overseeing and controlling risks. The
+main activities are generally deﬁned as risk assessment, risk
+treatment, and risk control (Figure 7.28).
+• Risk Assessment — In the risk assessment stage, the cloud
+environment is analyzed to identify potential vulnerabilities
+and shortcomings that threats can exploit. The cloud provider
+can be asked to produce statistics and other information about
+past attacks (successful and unsuccessful) carried out in its
+cloud. The identiﬁed risks are quantiﬁed and qualiﬁed
+according to the probability of occurrence and the degree of
+impact in relation to how the cloud consumer plans to utilize
+cloud-based IT resources.
+Figure 7.28
+The on-going risk management process, which can be initiated
+from any of the three stages.
+• Risk Treatment — Mitigation policies and plans are designed
+during the risk treatment stage with the intent of successfully
+treating the risks that were discovered during risk assessment.
+Some risks can be eliminated, others can be mitigated, while
+others can be dealt with via outsourcing or even incorporated
+into the insurance and/or operating loss budgets. The cloud
+provider itself may agree to assume responsibility as part of its
+contractual obligations.
+• Risk Control — The risk control stage is related to risk
+monitoring, a three-step process that is comprised of surveying
+related events, reviewing these events to determine the
+eﬀectiveness of previous assessments and treatments, and
+identifying any policy adjustment needs. Depending on the
+nature of the monitoring required, this stage may be carried out
+or shared by the cloud provider.
+The threat agents and cloud security threats covered in this
+chapter (as well as others that may surface) can be identiﬁed
+and documented as part of the risk assessment stage. The cloud
+security and cybersecurity mechanisms covered in Chapters 10
+and 11 can be documented and referenced as part of the
+corresponding risk treatment.
+7.7 Case Study Example
+Based on an assessment of its internal
+applications, ATN analysts identify a set of risks.
+One such risk is associated with the myTrendek
+application that was adopted from OTC, a
+company ATN recently acquired. This
+application includes a feature that analyzes
+telephone and Internet usage, and enables a
+multi-user mode that grants varying access
+rights. Administrators, supervisors, auditors,
+and regular users can therefore be assigned
+diﬀerent privileges. The application’s user-base
+encompasses internal users and external users,
+such as business partners and contractors.
+The myTrendek application poses a number of
+security challenges pertaining to usage by
+internal staﬀ:
+• authentication does not require or enforce
+complex passwords
+• communication with the application is not
+encrypted
+• European regulations (ETelReg) require that
+certain types of data collected by the application
+be deleted after six months
+ATN is planning to migrate this application to a
+cloud via a PaaS environment, but the weak
+authentication threat and the lack of
+conﬁdentiality supported by the application
+make them reconsider. A subsequent risk
+assessment further reveals that if the
+application is migrated to a PaaS environment
+hosted by a cloud that resides outside of
+Europe, local regulations may be in conﬂict
+with ETelReg. Given that the cloud provider is
+not concerned with ETelReg compliance, this
+could easily result in monetary penalties being
+assessed to ATN. Based on the results of the risk
+assessment, ATN decides not to proceed with its
+cloud migration plan.
+Part II
+Cloud Computing Mechanisms
+Chapter 8: Cloud Infrastructure Mechanisms
+Chapter 9: Specialized Cloud Mechanisms
+Chapter 10: Cloud and Cyber Security Access-Oriented
+Mechanisms
+Chapter 11: Cloud and Cyber Security Data-Oriented
+Mechanisms
+Chapter 12: Cloud Management Mechanisms
+Technology mechanisms represent well-deﬁned IT artifacts that
+are established within the IT industry and commonly distinct to
+a certain computing model or platform. The technology-centric
+nature of cloud computing requires the establishment of a
+formal set of mechanisms that act as building blocks for cloud
+technology architectures.
+The chapters in this part of the book deﬁne over 50 common
+cloud computing mechanisms that can be combined in diﬀerent
+and alternative variations.
+Select mechanisms are further referenced in the architectural
+models covered in Part III: Cloud Computing Architecture.
+Chapter 8
+Cloud Infrastructure Mechanisms
+8.1 Logical Network Perimeter
+8.2 Virtual Server
+8.3 Hypervisor
+8.4 Cloud Storage Device
+8.5 Cloud Usage Monitor
+8.6 Resource Replication
+8.7 Ready-Made Environment
+8.8 Container
+Cloud infrastructure mechanisms are foundational building
+blocks of cloud environments that establish primary artifacts to
+form the basis of fundamental cloud technology architecture.
+The following cloud infrastructure mechanisms are described in
+this chapter:
+• Logical Network Perimeter
+• Virtual Server
+• Hypervisor
+• Cloud Storage Device
+• Cloud Usage Monitor
+• Resource Replication
+• Ready-Made Environment
+• Container
+Not all of these mechanisms are necessarily broad-reaching, nor
+does each establish an individual architectural layer. Instead,
+they should be viewed as core components that are common to
+cloud platforms.
+8.1 Logical Network Perimeter
+Deﬁned as the isolation of a network environment from the rest
+of a communications network, the logical network perimeter
+establishes a virtual network boundary that can encompass and
+isolate a group of related cloud-based IT resources that may be
+physically distributed (Figure 8.1).
+Figure 8.1
+The dashed line notation used to indicate the boundary of a
+logical network perimeter.
+This mechanism can be implemented to:
+• isolate IT resources in a cloud from non-authorized users
